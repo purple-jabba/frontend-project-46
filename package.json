@@ -12,5 +12,15 @@
     "url": "https://github.com/purple-jabba"
   },
   "author": "Denis Karnafel",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^11.0.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "eslint": "^8.46.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.28.0",
+    "eslint-plugin-jest": "^27.2.3"
+  }
 }
