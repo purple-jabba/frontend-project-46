@@ -1,6 +1,9 @@
 {
   "name": "@hexlet/code",
   "version": "1.0.0",
+  "bin": {
+    "gendiff": "bin/gendiff.js"
+  },
   "type": "module",
   "description": "Second project for Hexlet!",
   "main": "index.js",
