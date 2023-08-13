@@ -1,6 +1,6 @@
-import convertPath from './convertPath.js';
 import { readFileSync } from 'node:fs';
+import convertPath from './convertPath.js';
 
-const readFile = (path) => readFileSync(convertPath(path), "utf8");
+const readFile = (path) => readFileSync(convertPath(path), 'utf8');
 
 export default readFile;
