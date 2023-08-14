@@ -23,7 +23,6 @@ const getDifference = (path1, path2) => {
       result.push([key, value, '+']);
     }
   });
-  console.log(result);
   return result;
 };
 
