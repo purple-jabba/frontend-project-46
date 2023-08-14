@@ -3,7 +3,7 @@ import readFile from './utils/readFile.js';
 
 const getDifference = (path1, path2) => {
   const result = [];
-  const comparePath1WithPath2 = _.forEach(Object.entries(path1), (entry) => {
+  _.forEach(Object.entries(path1), (entry) => {
     const [key, value] = entry;
     if (Object.hasOwn(path2, key)) {
       if (value === path2[key]) {
@@ -17,7 +17,7 @@ const getDifference = (path1, path2) => {
       result.push([key, value, '-']);
     }
   });
-  const hasOnlyInPath2 = _.forEach(Object.entries(path2), (entry) => {
+  _.forEach(Object.entries(path2), (entry) => {
     const [key, value] = entry;
     if (!Object.hasOwn(path1, key)) {
       result.push([key, value, '+']);
@@ -29,7 +29,7 @@ const getDifference = (path1, path2) => {
 
 const displayDifference = (info) => {
   console.log('{');
-  const output = _.forEach(info, (arr) => {
+  _.forEach(info, (arr) => {
     if (arr.length === 3) {
       console.log(`  ${arr[2]} ${arr[0]}: ${arr[1]}`);
     }
@@ -41,7 +41,6 @@ const displayDifference = (info) => {
     }
   });
   console.log('}');
-  return output;
 };
 
 const getDiffJson = (filepath1, filepath2) => {
