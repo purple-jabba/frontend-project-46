@@ -52,10 +52,7 @@ const getDiffJson = (filepath1, filepath2) => {
   const compare = getDifference(copyOfPath1, copyOfPath2);
   const sortedResult = _.sortBy(compare);
 
-  const display = displayDifference(sortedResult);
-  return display;
+  displayDifference(sortedResult);
 };
-
-getDiffJson('../__fixtures__/file1.json', '../__fixtures__/file2.json');
 
 export default getDiffJson;
