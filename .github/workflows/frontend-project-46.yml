@@ -1,0 +1,12 @@
+name: test-and-linter
+on:
+  - push
+  - pull_request
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: test
+        run: make test
+      - name: lint
+        run: make lint
