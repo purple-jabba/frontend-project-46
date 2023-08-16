@@ -7,6 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: test
-        run: make test
+        run: npx jest
       - name: lint
-        run: make lint
+        run: npx eslint .
