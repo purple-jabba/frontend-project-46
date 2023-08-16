@@ -6,6 +6,8 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
+      - name: install
+        run: npm ci
       - name: test
         run: npx jest
       - name: lint
