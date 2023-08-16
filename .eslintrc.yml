@@ -1,5 +1,8 @@
 ---
 
+plugins:
+  - jest
+
 env:
   node: true
 
@@ -7,6 +10,7 @@ extends:
   - 'eslint:recommended' 
   - 'airbnb-base' 
   - 'plugin:import/recommended'
+  - 'plugin:jest/recommended'
 
 parserOptions:
   ecmaVersion: latest
