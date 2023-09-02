@@ -1,7 +1,6 @@
 import _ from 'lodash';
-import readFile from './utils/readFile.js';
 
-const getDifference = (path1, path2) => {
+export const getDifference = (path1, path2) => {
   const result = [];
   _.forEach(Object.entries(path1), (entry) => {
     const [key, value] = entry;
@@ -26,7 +25,7 @@ const getDifference = (path1, path2) => {
   return result;
 };
 
-const displayDifference = (info) => {
+export const displayDifference = (info) => {
   console.log('{');
   _.forEach(info, (arr) => {
     if (arr.length === 3) {
@@ -41,18 +40,3 @@ const displayDifference = (info) => {
   });
   console.log('}');
 };
-
-const getDiffJson = (filepath1, filepath2) => {
-  const path1ToParse = JSON.parse(readFile(filepath1));
-  const path2ToParse = JSON.parse(readFile(filepath2));
-
-  const copyOfPath1 = path1ToParse;
-  const copyOfPath2 = path2ToParse;
-
-  const compare = getDifference(copyOfPath1, copyOfPath2);
-  const sortedResult = _.sortBy(compare);
-
-  displayDifference(sortedResult);
-};
-
-export default getDiffJson;
