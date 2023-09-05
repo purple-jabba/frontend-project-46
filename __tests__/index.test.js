@@ -2,8 +2,8 @@ import { expect } from '@jest/globals';
 import gendiff from '../src/index.js';
 import readFile from '../src/utils/readFile.js';
 
-const resultJson = readFile('./__fixtures__/toBeExpectedJson');
-const resultYml = readFile('./__fixtures__/toBeExpectedYml');
+const resultJson = readFile('./__fixtures__/toBeExpectedJson.ini');
+const resultYml = readFile('./__fixtures__/toBeExpectedYml.ini');
 
 test('json output check', () => {
   const filepath1 = '__fixtures__/file1.json';
