@@ -1,5 +1,5 @@
-import _ from 'lodash';
-import { getDifference, displayDifference } from './getTree.js';
+import getDifference from './getDifference.js';
+import displayStylish from './formatters/stylish.js';
 import parse from './utils/parsers.js';
 
 const gendiff = (filepath1, filepath2) => {
@@ -10,9 +10,8 @@ const gendiff = (filepath1, filepath2) => {
   const copyOfPath2 = path2ToParse;
 
   const compare = getDifference(copyOfPath1, copyOfPath2);
-  const sortedResult = _.sortBy(compare);
-
-  displayDifference(sortedResult);
+  const displayDifference = displayStylish(compare);
+  return displayDifference;
 };
 
 export default gendiff;
