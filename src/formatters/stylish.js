@@ -1,8 +1,9 @@
 // Use true or false for parameter haveChanges.
 const indent = (depth, haveChanges) => {
   const indentCount = 4;
+  const leftShift = 2;
   const indentSymbol = ' ';
-  return haveChanges ? indentSymbol.repeat(indentCount * depth - 2)
+  return haveChanges ? indentSymbol.repeat(indentCount * depth - leftShift)
     : indentSymbol.repeat(indentCount * depth);
 };
 
