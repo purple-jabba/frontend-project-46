@@ -6,25 +6,23 @@ const indent = (depth, haveChanges) => {
     : indentSymbol.repeat(indentCount * depth);
 };
 
-const displayStylish = (differenceTree, depth = 1) => differenceTree.flatMap((data) => {
-  switch (data.type) {
-    case 'nested':
-      console.log(`${indent(depth, false)}${data.key}: {\n${displayStylish(data.children, depth + 1)}`);
-      return `${indent(depth, false)}${data.key}: {\n${displayStylish(data.children, depth + 1)}`;
-    case 'added':
-      console.log(`${indent(depth, true)}+ ${data.key}: ${data.value}`);
-      return `${indent(depth, true)}+ ${data.key}: ${data.value}`;
-    case 'deleted':
-      console.log(`${indent(depth, true)}- ${data.key}: ${data.value}`);
-      return `${indent(depth, true)}- ${data.key}: ${data.value}`;
-    case 'changed':
-      console.log(`${indent(depth, true)}- ${data.key}: ${data.initialValue}\n${indent(depth, true)}+ ${data.key}: ${data.changedValue}`);
-      return `${indent(depth, true)}- ${data.key}: ${data.initialValue}\n${indent(depth, true)}+ ${data.key}: ${data.changedValue}`;
-    case 'unchanged':
-      console.log(`${indent(depth, false)}${data.key}: ${data.value}`);
-      return `${indent(depth, false)}${data.key}: ${data.value}`;
-    default: throw new Error(`Wrong type of data ${data.type}.`);
-  }
-});
+const displayStylish = (node, depth = 1) => {
+  const buildStylish = node.flatMap((data) => {
+    switch (data.type) {
+      case 'nested':
+        return `${indent(depth, false)}${data.key}: {\n${displayStylish(data.children, depth + 1)}`;
+      case 'added':
+        return `${indent(depth, true)}+ ${data.key}: ${data.value}`;
+      case 'deleted':
+        return `${indent(depth, true)}- ${data.key}: ${data.value}`;
+      case 'changed':
+        return `${indent(depth, true)}- ${data.key}: ${data.initialValue}\n${indent(depth, true)}+ ${data.key}: ${data.changedValue}`;
+      case 'unchanged':
+        return `${indent(depth, false)}${data.key}: ${data.value}`;
+      default: throw new Error(`Wrong type of data ${data.type}.`);
+    }
+  });
+  return `{\n${buildStylish.join('\n')}\n}`;
+};
 
 export default displayStylish;
