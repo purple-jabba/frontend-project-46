@@ -1,8 +1,8 @@
 import getDifference from './getDifference.js';
-import displayStylish from './formatters/stylish.js';
 import parse from './utils/parsers.js';
+import selectFormat from './formatters/selectFormat.js';
 
-const gendiff = (filepath1, filepath2) => {
+const gendiff = (filepath1, filepath2, format = 'stylish') => {
   const path1ToParse = parse(filepath1);
   const path2ToParse = parse(filepath2);
 
@@ -10,7 +10,7 @@ const gendiff = (filepath1, filepath2) => {
   const copyOfPath2 = path2ToParse;
 
   const compare = getDifference(copyOfPath1, copyOfPath2);
-  const displayDifference = displayStylish(compare);
+  const displayDifference = selectFormat(compare, format);
   return displayDifference;
 };
 
