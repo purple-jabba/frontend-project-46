@@ -1,9 +1,12 @@
 import displayStylish from './stylish.js';
+import displayPlain from './plain.js';
 
 const selectFormat = (node, format) => {
   switch (format) {
     case 'stylish':
       return displayStylish(node);
+    case 'plain':
+      return displayPlain(node);
     default: throw new Error(`Unexpected format ${format}. Use supported formats only`);
   }
 };

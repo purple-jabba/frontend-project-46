@@ -1,6 +1,6 @@
 import getDifference from './getDifference.js';
 import parse from './utils/parsers.js';
-import selectFormat from './formatters/selectFormat.js';
+import selectFormat from './formatters/index.js';
 
 const gendiff = (filepath1, filepath2, format = 'stylish') => {
   const path1ToParse = parse(filepath1);
