@@ -7,6 +7,8 @@ const selectFormat = (node, format) => {
       return displayStylish(node);
     case 'plain':
       return displayPlain(node);
+    case 'json':
+      return JSON.stringify(node);
     default: throw new Error(`Unexpected format ${format}. Use supported formats only`);
   }
 };
