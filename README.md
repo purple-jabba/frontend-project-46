@@ -10,7 +10,7 @@
 [![Actions Status](https://github.com/purple-jabba/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/purple-jabba/frontend-project-46/actions)
 
 ### gendiff-json
-[![asciicast](https://asciinema.org/a/n9SnMnv45pvJRC83Rm4sQfIg2.svg)](https://asciinema.org/a/n9SnMnv45pvJRC83Rm4sQfIg2)
+[![asciicast](https://asciinema.org/a/IheL7jHUQOM5YL2HXe452x2o6.svg)](https://asciinema.org/a/IheL7jHUQOM5YL2HXe452x2o6)
 ### gendiff-stylish
 [![asciicast](https://asciinema.org/a/P9qCTkZLkuVd2yNptzNOcP2yf.svg)](https://asciinema.org/a/P9qCTkZLkuVd2yNptzNOcP2yf)
 ### gendiff-plain
