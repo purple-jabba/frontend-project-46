@@ -1,24 +1,24 @@
-import { expect } from '@jest/globals';
+import { expect, test } from '@jest/globals';
 import gendiff from '../src/index.js';
 import readFile from '../src/utils/readFile.js';
 
-const resultJson = readFile('./__fixtures__/toBeExpectedJson.ini');
-const resultYml = readFile('./__fixtures__/toBeExpectedYml.ini');
+const resultStylish = readFile('./__fixtures__/toBeExpectedStylish.ini');
+const resultPlain = readFile('./__fixtures__/toBeExpectedPlain.ini');
 
-test('json output check', () => {
-  const filepath1 = '__fixtures__/file1.json';
+test('stylish output check', () => {
+  const filepath1 = '__fixtures__/file1.yml';
   const filepath2 = '__fixtures__/file2.json';
 
-  const output = gendiff(filepath1, filepath2);
+  const output = gendiff(filepath1, filepath2, 'stylish');
 
-  expect(output).toEqual(resultJson);
+  expect(output).toEqual(resultStylish);
 });
 
-test('yaml output check', () => {
+test('plain output check', () => {
   const filepath1 = '__fixtures__/file1.yml';
-  const filepath2 = '__fixtures__/file2.yml';
+  const filepath2 = '__fixtures__/file2.json';
 
-  const output = gendiff(filepath1, filepath2);
+  const output = gendiff(filepath1, filepath2, 'plain');
 
-  expect(output).toEqual(resultYml);
+  expect(output).toEqual(resultPlain);
 });
