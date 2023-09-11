@@ -1,34 +1,25 @@
-import { expect, test } from '@jest/globals';
+import { fileURLToPath } from 'url';
+import path from 'node:path';
+import fs from 'fs';
 import gendiff from '../src/index.js';
-import readFile from '../src/utils/readFile.js';
 
-const resultStylish = readFile('./__fixtures__/toBeExpectedStylish.ini');
-const resultPlain = readFile('./__fixtures__/toBeExpectedPlain.ini');
-const resultJson = readFile('./__fixtures__/toBeExpectedJson.ini');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-test('stylish output check', () => {
-  const filepath1 = '__fixtures__/file1.yml';
-  const filepath2 = '__fixtures__/file2.json';
+const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
+const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-  const output = gendiff(filepath1, filepath2, 'stylish');
+const file1 = './__fixtures__/file1.yml';
+const file2 = './__fixtures__/file2.json';
 
-  expect(output).toEqual(resultStylish);
-});
+const resultStylish = readFile('toBeExpectedStylish.ini');
+const resultPlain = readFile('toBeExpectedPlain.ini');
+const resultJson = readFile('toBeExpectedJson.ini');
 
-test('plain output check', () => {
-  const filepath1 = '__fixtures__/file1.yml';
-  const filepath2 = '__fixtures__/file2.json';
-
-  const output = gendiff(filepath1, filepath2, 'plain');
-
-  expect(output).toEqual(resultPlain);
-});
-
-test('json output check', () => {
-  const filepath1 = '__fixtures__/file1.yml';
-  const filepath2 = '__fixtures__/file2.json';
-
-  const output = gendiff(filepath1, filepath2, 'json');
-
-  expect(output).toEqual(resultJson);
+test.each([
+  { output: gendiff(file1, file2, 'stylish'), expected: resultStylish, title: 'stylish' },
+  { output: gendiff(file1, file2, 'plain'), expected: resultPlain, title: 'plain' },
+  { output: gendiff(file1, file2, 'json'), expected: resultJson, title: 'json' },
+])('$title output check', ({ output, expected }) => {
+  expect(output).toEqual(expected);
 });
