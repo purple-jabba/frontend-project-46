@@ -1,35 +1,37 @@
 import _ from 'lodash';
 
-// Use true or false for parameter haveChanges.
-const indent = (depth, haveChanges) => {
+const indent = (depth) => {
   const indentCount = 4;
   const leftShift = 2;
   const indentSymbol = ' ';
-  return haveChanges ? indentSymbol.repeat(indentCount * depth - leftShift)
-    : indentSymbol.repeat(indentCount * depth);
+  return indentSymbol.repeat(indentCount * depth - leftShift);
 };
 
 const stylishValue = (node, depth) => {
   if (!_.isObject(node)) {
     return String(node);
   }
-  const displayValue = Object.entries(node).flatMap(([key, value]) => `${indent(depth + 1, false)}${key}: ${stylishValue(value, depth + 1)}`);
-  return `{\n${displayValue.join('\n')}\n${indent(depth, false)}}`;
+  const displayValue = Object.entries(node).flatMap(([key, value]) => `  ${indent(depth + 1)}${key}: ${stylishValue(value, depth + 1)}`);
+  return `{\n${displayValue.join('\n')}\n  ${indent(depth)}}`;
 };
 
 const buildStylish = (node, depth = 1) => {
   const result = node.flatMap((data) => {
     switch (data.type) {
       case 'nested':
-        return `${indent(depth, false)}${data.key}: {\n${buildStylish(data.children, depth + 1)}\n${indent(depth, false)}}`;
+        return `  ${indent(depth)}${data.key}: {\n${buildStylish(data.children, depth + 1)}\n  ${indent(depth)}}`;
       case 'added':
-        return `${indent(depth, true)}+ ${data.key}: ${stylishValue(data.value, depth)}`;
+        return `${indent(depth)}+ ${data.key}: ${stylishValue(data.value, depth)}`;
       case 'deleted':
-        return `${indent(depth, true)}- ${data.key}: ${stylishValue(data.value, depth)}`;
+        return `${indent(depth)}- ${data.key}: ${stylishValue(data.value, depth)}`;
       case 'changed':
-        return `${indent(depth, true)}- ${data.key}: ${stylishValue(data.value1, depth)}\n${indent(depth, true)}+ ${data.key}: ${stylishValue(data.value2, depth)}`;
+        return [
+          `${indent(depth)}- ${data.key}: ${stylishValue(data.value1, depth)}`,
+          `${indent(depth)}+ ${data.key}: ${stylishValue(data.value2, depth)}`,
+        ]
+          .join('\n');
       case 'unchanged':
-        return `${indent(depth, false)}${data.key}: ${stylishValue(data.value, depth)}`;
+        return `  ${indent(depth)}${data.key}: ${stylishValue(data.value, depth)}`;
       default: throw new Error(`Wrong type of data ${data.type}.`);
     }
   });
