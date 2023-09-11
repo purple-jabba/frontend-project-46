@@ -1,16 +1,16 @@
 import displayStylish from './stylish.js';
 import displayPlain from './plain.js';
 
-const selectFormat = (node, format) => {
-  switch (format) {
+const format = (node, outputFormat) => {
+  switch (outputFormat) {
     case 'stylish':
       return displayStylish(node);
     case 'plain':
       return displayPlain(node);
     case 'json':
       return JSON.stringify(node);
-    default: throw new Error(`Unexpected format ${format}. Use supported formats only`);
+    default: throw new Error(`Unexpected format ${outputFormat}. Use supported formats only`);
   }
 };
 
-export default selectFormat;
+export default format;
