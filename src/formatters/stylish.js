@@ -27,7 +27,7 @@ const buildStylish = (node, depth = 1) => {
       case 'deleted':
         return `${indent(depth, true)}- ${data.key}: ${stylishValue(data.value, depth)}`;
       case 'changed':
-        return `${indent(depth, true)}- ${data.key}: ${stylishValue(data.initialValue, depth)}\n${indent(depth, true)}+ ${data.key}: ${stylishValue(data.changedValue, depth)}`;
+        return `${indent(depth, true)}- ${data.key}: ${stylishValue(data.value1, depth)}\n${indent(depth, true)}+ ${data.key}: ${stylishValue(data.value2, depth)}`;
       case 'unchanged':
         return `${indent(depth, false)}${data.key}: ${stylishValue(data.value, depth)}`;
       default: throw new Error(`Wrong type of data ${data.type}.`);

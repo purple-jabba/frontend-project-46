@@ -23,7 +23,7 @@ const displayPlain = (node, keypath = '') => {
       case 'deleted':
         return `Property '${collectedKeys}' was removed`;
       case 'changed':
-        return `Property '${collectedKeys}' was updated. From ${plainValue(data.initialValue)} to ${plainValue(data.changedValue)}`;
+        return `Property '${collectedKeys}' was updated. From ${plainValue(data.value1)} to ${plainValue(data.value2)}`;
       default: throw new Error(`Wrong type of data ${data.type}.`);
     }
   });
