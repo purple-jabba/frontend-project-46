@@ -13,10 +13,7 @@ const gendiff = (filepath1, filepath2, format = 'stylish') => {
   const path1ToParse = parse(readFile(filepath1), extname(filepath1).split('.')[1]);
   const path2ToParse = parse(readFile(filepath2), extname(filepath2).split('.')[1]);
 
-  const copyOfPath1 = path1ToParse;
-  const copyOfPath2 = path2ToParse;
-
-  const compare = getDifference(copyOfPath1, copyOfPath2);
+  const compare = getDifference(path1ToParse, path2ToParse);
   const displayDifference = selectFormat(compare, format);
   return displayDifference;
 };
