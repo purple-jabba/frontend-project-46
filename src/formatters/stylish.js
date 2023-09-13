@@ -1,11 +1,6 @@
 import _ from 'lodash';
 
-const indent = (depth) => {
-  const indentCount = 4;
-  const leftShift = 2;
-  const indentSymbol = ' ';
-  return indentSymbol.repeat(indentCount * depth - leftShift);
-};
+const indent = (depth, indentCount = 4, leftShift = 2, indentSymbol = ' ') => indentSymbol.repeat(indentCount * depth - leftShift);
 
 const stylishValue = (node, depth) => {
   if (!_.isObject(node)) {
