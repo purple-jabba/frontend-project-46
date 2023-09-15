@@ -9,29 +9,34 @@ const __dirname = path.dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-const file1 = './__fixtures__/file1.json';
-const file2 = './__fixtures__/file2.json';
-
-const resultStylish = readFile('toBeExpectedStylish.ini');
-const resultPlain = readFile('toBeExpectedPlain.ini');
-const resultJson = readFile('toBeExpectedJson.ini');
-
 test.each([
   {
-    first: file1, second: file2, expected: resultStylish, format: 'stylish',
+    first: 'file1.json', second: 'file2.json', expected: 'toBeExpectedStylish.ini', format: 'stylish', title: 'stylish', extension: '.json',
   },
   {
-    first: file1, second: file2, expected: resultPlain, format: 'plain',
+    first: 'file1.json', second: 'file2.json', expected: 'toBeExpectedPlain.ini', format: 'plain', title: 'plain', extension: '.json',
   },
   {
-    first: file1, second: file2, expected: resultJson, format: 'json',
+    first: 'file1.json', second: 'file2.json', expected: 'toBeExpectedJson.ini', format: 'json', title: 'json', extension: '.json',
   },
-])('$format output check', ({
+  {
+    first: 'file1.json', second: 'file2.json', expected: 'toBeExpectedStylish.ini', format: undefined, title: 'default', extension: '.json',
+  },
+  {
+    first: 'file3.yml', second: 'file4.yml', expected: 'toBeExpectedStylish.ini', format: 'stylish', title: 'stylish', extension: '.yml',
+  },
+  {
+    first: 'file3.yml', second: 'file4.yml', expected: 'toBeExpectedPlain.ini', format: 'plain', title: 'plain', extension: '.yml',
+  },
+  {
+    first: 'file3.yml', second: 'file4.yml', expected: 'toBeExpectedJson.ini', format: 'json', title: 'json', extension: '.yml',
+  },
+  {
+    first: 'file3.yml', second: 'file4.yml', expected: 'toBeExpectedStylish.ini', format: undefined, title: 'default', extension: '.yml',
+  },
+])('$title format with the extension $extension output check', ({
   first, second, expected, format,
 }) => {
-  expect(gendiff(first, second, format)).toEqual(expected);
-});
-
-test('default output check', () => {
-  expect(gendiff(file1, file2)).toEqual(resultStylish);
+  expect(gendiff(getFixturePath(first), getFixturePath(second), format))
+    .toEqual(readFile(expected));
 });
