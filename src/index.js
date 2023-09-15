@@ -12,10 +12,10 @@ const readFile = (path) => readFileSync(buildFullPath(path), 'utf8');
 const getExtension = (filepath) => extname(filepath).split('.')[1];
 
 const gendiff = (filepath1, filepath2, outputFormat = 'stylish') => {
-  const parseFilepath1 = parse(readFile(filepath1), getExtension(filepath1));
-  const parseFilepath2 = parse(readFile(filepath2), getExtension(filepath2));
+  const parsedData1 = parse(readFile(filepath1), getExtension(filepath1));
+  const parsedData2 = parse(readFile(filepath2), getExtension(filepath2));
 
-  const differenceTree = getDifference(parseFilepath1, parseFilepath2);
+  const differenceTree = getDifference(parsedData1, parsedData2);
   const formattedTree = format(differenceTree, outputFormat);
   return formattedTree;
 };
